@@ -28,7 +28,7 @@ function Details() {
             </tr>
           </thead>
           <tbody>
-            {order?.TransitEvents.map((item, index) => (
+            {order?.TransitEvents?.map((item, index) => (
               <tr key={index}>
                 <td className="p-2 border border-gray-300">
                   {item.hub ? item.hub : "N/A"}
