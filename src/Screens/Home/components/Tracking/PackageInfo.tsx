@@ -1,6 +1,6 @@
 import useOrderStore from "../../../../stores/OrderStore";
 import { useMemo } from "react";
-
+import i18next from "../../../../locals/i18n";
 function PackageInfo() {
   const { order } = useOrderStore();
   const convertDate = (date: string) => {
@@ -25,39 +25,48 @@ function PackageInfo() {
     if (order?.CurrentStatus?.state === "CANCELLED") {
       return "N/A";
     } else if (order?.CurrentStatus?.state === "DELIVERED") {
-      return "Delivered";
+      return i18next.t("packageDelivered");
     } else if (lastEventTimestamp && order?.PromisedDate) {
       return (
         calculateDateDifference(lastEventTimestamp, order.PromisedDate) +
-        " days"
+        " " +
+        i18next.t("days")
       );
     }
     return "";
   }, [order?.CurrentStatus?.state, lastEventTimestamp, order?.PromisedDate]);
 
   return (
-    <div className="flex flex-col md:flex-row h-1/2 border-b-2 border-gray-200 w-full justify-around items-start pt-6 pb-6 pl-8 md:pl-0 md:items-center">
+    <div
+      className={`flex flex-col md:flex-row h-1/2 border-b-2 border-gray-200 w-full justify-around items-start pt-6 pb-6 pl-8 md:pl-0 md:items-center
+      ${i18next.language === "ar" ? "md:flex-row-reverse" : "md:flex-row"}
+    `}
+    >
       <div className="mb-4 md:mb-0">
         <h1 className="md:text-sm text-lg text-gray-500">
-          Delivery Id {order?.TrackingNumber}
+          {i18next.t("deliveryId")} {order?.TrackingNumber}
         </h1>
         <h1 className="md:text-lg text-red-500">
           {order?.CurrentStatus?.state}
         </h1>
       </div>
       <div className="mb-4 md:mb-0">
-        <h1 className="md:text-sm text-lg text-gray-500">Last update</h1>
+        <h1 className="md:text-sm text-lg text-gray-500">
+          {i18next.t("lastUpdate")}
+        </h1>
         <h1 className=" md:text-lg">
           {lastEventTimestamp ? convertDate(lastEventTimestamp) : ""}
         </h1>
       </div>
       <div className="mb-4 md:mb-0">
-        <h1 className="md:text-sm text-lg text-gray-500">Merchant Name</h1>
+        <h1 className="md:text-sm text-lg text-gray-500">
+          {i18next.t("merchantName")}
+        </h1>
         <h1 className="md:text-lg">{order?.provider}</h1>
       </div>
       <div className="mb-4 md:mb-0">
         <h1 className="md:text-sm text-lg text-gray-500">
-          Estimated Delivery Time
+          {i18next.t("estimatedDTime")}
         </h1>
         <h1 className="md:text-lg text-lg">{estimatedDeliveryTime}</h1>
       </div>

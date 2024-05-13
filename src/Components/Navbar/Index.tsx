@@ -5,9 +5,11 @@ import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Input, Modal } from "antd";
 import axios from "axios";
 import useOrderStore from "../../stores/OrderStore";
+import i18next from "../../locals/i18n";
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const {setOrder} = useOrderStore();
+  const { setOrder } = useOrderStore();
 
   const [open, setOpen] = useState(false);
   const [confirmLoading] = useState(false);
@@ -45,45 +47,61 @@ function Navbar() {
 
   return (
     <nav className="bg-white p-4 border-b-2 border-gray-200">
-      <div className="w-[90%] mx-auto flex items-center justify-between">
+      <div
+        className={`w-[90%] mx-auto flex items-center justify-between
+      ${i18next.language === "ar" ? "flex-row-reverse" : "flex-row"}
+      `}
+      >
         <div className="flex items-center">
           <BostaSvg />
         </div>
 
         <div className="hidden md:flex items-center space-x-16 text-lg">
           <a href="/" className="text-black hover:text-gray-500 px-2 py-1">
-            Main
+            {i18next.t("login")}
           </a>
           <a href="#" className="text-black hover:text-gray-500 px-2 py-1">
-            Prices
+            {i18next.t("prices")}
           </a>
           <a href="#" className="text-black hover:text-gray-500 px-2 py-1">
-            Contact Sales
+            {i18next.t("contactSales")}
           </a>
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
           <Button type="primary" onClick={showModal}>
-            Track
+            {i18next.t("track")}
           </Button>
           <Modal
-            title="Enter your tracking code"
+            title={i18next.t("enterTracking")}
             open={open}
             onOk={handleOk}
             confirmLoading={confirmLoading}
             onCancel={handleCancel}
-            okText="Track"
-            cancelText="Cancel"
+            okText={i18next.t("trackButton")}
+            cancelText={i18next.t("cancel")}
           >
             <Input
               value={trackingCode}
               onChange={(e) => setTrackingCode(e.target.value)}
-              placeholder="Enter your tracking code"
+              placeholder={i18next.t("enterTracking")}
             />
           </Modal>
           <div className="border-r-2 border-gray-3000 h-6"></div>
-          <button className="text-black px-4 py-2 rounded-md">Login</button>
-          <button className="text-red-500 px-4 py-2 rounded-md">عربي</button>
+          <button className="text-black px-4 py-2 rounded-md">
+            {i18next.t("login")}
+          </button>
+          <button
+            className="text-red-500 px-4 py-2 rounded-md"
+            onClick={() => {
+              // change the langauge and save it to localstorage and then reload the page
+              const lang = i18next.language === "en" ? "ar" : "en";
+              localStorage.setItem("lang", lang);
+              window.location.reload();
+            }}
+          >
+            {i18next.t("arabic")}
+          </button>
         </div>
 
         <div className="md:hidden">
@@ -92,22 +110,35 @@ function Navbar() {
           </button>
           <div className={`menu ${isOpen ? "open-menu" : "close-menu"}`}>
             <a href="/" className="text-black hover:text-gray-500">
-              Main
+              {i18next.t("main")}
             </a>
             <a href="#" className="text-black hover:text-gray-500">
-              Prices
+              {i18next.t("prices")}
             </a>
             <a href="#" className="text-black hover:text-gray-500">
-              Contact Sales
+              {i18next.t("contactSales")}
             </a>
             <Button
               type="primary"
               onClick={showModal}
               style={{ marginTop: "10px", height: "60px" }}
             >
-              Track
+              {i18next.t("track")}
             </Button>
-            <button className="text-black px-4 py-2 rounded-md">Login</button>
+            <button className="text-black px-4 py-2 rounded-md">
+              {i18next.t("login")}
+            </button>
+            <button
+              className="text-red-500 px-4 py-2 rounded-md"
+              onClick={() => {
+                // change the langauge and save it to localstorage and then reload the page
+                const lang = i18next.language === "en" ? "ar" : "en";
+                localStorage.setItem("lang", lang);
+                window.location.reload();
+              }}
+            >
+              {i18next.t("arabic")}
+            </button>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import report from "../../../../assets/report.avif";
 import { Button, Modal, message } from "antd";
 import { useState } from "react";
 import TextArea from "antd/es/input/TextArea";
+import i18next from "../../../../locals/i18n";
 function Address() {
   const [open, setOpen] = useState(false);
   const [confirmLoading] = useState(false);
@@ -20,8 +21,12 @@ function Address() {
     setOpen(false);
   };
   return (
-    <div className="flex flex-col justify-between items-start w-full">
-      <h1 className="text-xl pb-4">Delivery Address</h1>
+    <div className={`flex flex-col justify-between items-start w-full
+      ${
+        i18next.language === "ar" ? "items-end" : "items-start"
+      }
+    `}>
+      <h1 className="text-xl pb-4">{i18next.t("deliveryAddress")}</h1>
       <div className=" bg-gray-100 p-4 rounded-md w-full">
         <p className="text-gray-500">
           52 Ahmed zaki st. Nozha el gdida, Cairo, Egypt
@@ -37,24 +42,24 @@ function Address() {
           }}
         />
         <div className="flex flex-col justify-start items-start">
-          <h1 className="text-sm ">Is there any problem?</h1>
+          <h1 className="text-sm ">{i18next.t("problem")}</h1>
           <Button
             type="primary"
             onClick={showModal}
             style={{ marginTop: "10px", height: "40px" }}
           >
-            Report a problem
+            {i18next.t("report")}
           </Button>
           <Modal
-            title="How can we help you?"
+            title={i18next.t("help")}
             open={open}
             onOk={handleOk}
             confirmLoading={confirmLoading}
             onCancel={handleCancel}
-            okText="Report"
-            cancelText="Cancel"
+            okText={i18next.t("reportButton")}
+            cancelText={i18next.t("cancel")}
           >
-            <TextArea rows={4} placeholder="Enter your problem" />
+            <TextArea rows={4} placeholder={i18next.t("enterProblem")} />
           </Modal>
         </div>
       </div>

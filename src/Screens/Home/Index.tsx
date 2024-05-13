@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useOrderStore from "../../stores/OrderStore.ts";
 import Loading from "./components/Loading/Index.tsx";
+import i18n from "../../locals/i18n";
 
 function Index() {
   const { setOrder } = useOrderStore();
@@ -26,6 +27,10 @@ function Index() {
   };
 
   useEffect(() => {
+    const lang = localStorage.getItem('lang');
+    if (lang) {
+      i18n.changeLanguage(lang);
+    }
     getOrder("7234258");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -2,6 +2,7 @@ import { DeliveredProcedureOutlined, TruckOutlined } from "@ant-design/icons";
 import { Steps } from "antd";
 import React, { useEffect, useState, useCallback } from "react";
 import useOrderStore from "../../../../stores/OrderStore";
+import i18next from "../../../../locals/i18n";
 
 type type = {
   title: string;
@@ -19,13 +20,13 @@ function TrackingGraph() {
   useEffect(() => {
     setTypes([
       {
-        title: "Package created",
+        title: i18next.t("packageCreated"),
         type: "PACKAGE_CREATED",
         color: "#000000",
         description: undefined as string | undefined,
       },
       {
-        title: "Package Received",
+        title: i18next.t("packageReceived"),
         type: "RECEIVED",
         color: "#000000",
         description: undefined as string | undefined,
@@ -38,7 +39,7 @@ function TrackingGraph() {
         description: undefined as string | undefined,
       },
       {
-        title: "Delivered",
+        title: i18next.t("packageDelivered"),
         type: "DELIVERED",
         color: "#000000",
         icon: <DeliveredProcedureOutlined />,
@@ -54,14 +55,14 @@ function TrackingGraph() {
     if (!order) return;
     console.log("current order state is", order.CurrentStatus?.state);
     if (order.CurrentStatus?.state === "CANCELLED") {
-      setTempOrderTitle("Order Cancelled");
+      setTempOrderTitle(i18next.t("packageCanceled"));
       setCurrent(2);
       // setStatus("error");
     } else if (order.CurrentStatus?.state === "DELIVERED_TO_SENDER") {
-      setTempOrderTitle("Delivered to sender");
+      setTempOrderTitle(i18next.t("deliveredToSender"));
       setCurrent(2);
     } else {
-      setTempOrderTitle("Out for delivery");
+      setTempOrderTitle(i18next.t("packageOutForDelivery"));
       const index = types.findIndex(
         (type) => type.type === order.CurrentStatus?.state
       );
