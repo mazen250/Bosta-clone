@@ -29,6 +29,7 @@
     "packageCanceled":"Package Canceled",
     "packageOutForDelivery":"Package Out For Delivery",
     "deliveredToSender":"Delivered To Sender",
-    "days":"Days"
+    "days":"Days",
+    "error":"Can't track this package"
   }
 

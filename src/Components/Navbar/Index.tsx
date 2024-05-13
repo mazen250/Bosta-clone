@@ -2,7 +2,7 @@ import { useState } from "react";
 import BostaSvg from "./BostaSvg";
 import "./Navbar.css";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
-import { Button, Input, Modal } from "antd";
+import { Button, Input, Modal, message } from "antd";
 import axios from "axios";
 import useOrderStore from "../../stores/OrderStore";
 import i18next from "../../locals/i18n";
@@ -34,6 +34,7 @@ function Navbar() {
         setOpen(false);
         setIsOpen(false);
         setTrackingCode("");
+        message.error(i18next.t("error"));
       });
   };
 

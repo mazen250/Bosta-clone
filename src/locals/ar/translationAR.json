@@ -29,7 +29,8 @@
     "packageCanceled":"تم الإلغاء",
     "packageOutForDelivery":"الشحنة خرجت للتوصيل",
     "deliveredToSender":"تم التوصيل إلى المرسل",
-    "days":"أيام"
+    "days":"أيام",
+    "error":"لا يمكن تتبع الطرد"
 
   }
 
