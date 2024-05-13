@@ -7,10 +7,10 @@ import axios from "axios";
 import useOrderStore from "../../stores/OrderStore";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { order, setOrder } = useOrderStore();
+  const {setOrder} = useOrderStore();
 
   const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [confirmLoading] = useState(false);
 
   const showModal = () => {
     setOpen(true);
