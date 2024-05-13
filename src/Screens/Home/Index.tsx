@@ -27,6 +27,7 @@ function Index() {
 
   useEffect(() => {
     getOrder("7234258");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

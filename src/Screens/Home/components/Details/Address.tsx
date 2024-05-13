@@ -4,7 +4,7 @@ import { useState } from "react";
 import TextArea from "antd/es/input/TextArea";
 function Address() {
   const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [confirmLoading] = useState(false);
 
   const showModal = () => {
     setOpen(true);

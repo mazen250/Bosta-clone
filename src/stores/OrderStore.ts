@@ -1,9 +1,10 @@
-import { create} from "zustand";
+import { create } from "zustand";
 
 type transiteEvent = {
+  hub: string;
   state: string;
   timestamp: string;
-}
+};
 
 type Order = {
   provider: string;
@@ -18,6 +19,7 @@ type Order = {
   TransitEvents: transiteEvent[];
   CreateDate: string;
   isEditableShipment: boolean;
+  hub: string;
 };
 
 interface OrderState {

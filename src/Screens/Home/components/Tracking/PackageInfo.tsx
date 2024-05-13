@@ -1,22 +1,8 @@
 import useOrderStore from "../../../../stores/OrderStore";
 import { useMemo } from "react";
 
-interface OrderStore {
-  order?: {
-    TrackingNumber?: string;
-    CurrentStatus?: {
-      state: string;
-    };
-    TransitEvents?: Array<{
-      timestamp: string;
-    }>;
-    PromisedDate?: string;
-    provider?: string;
-  };
-}
-
 function PackageInfo() {
-  const { order } = useOrderStore() as OrderStore;
+  const { order } = useOrderStore();
   const convertDate = (date: string) => {
     return new Date(date).toLocaleString();
   };
